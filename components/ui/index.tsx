@@ -3,6 +3,6 @@ import { H1, H2, P } from "./Text";
 import Accordion from "./accordion";
 import Badge from "./badge";
 import Seperator from "./seperator";
+import Switch from "./switch";
 
-export { Accordion, Badge, H1, H2, MonoText, P, Seperator };
-
+export { Accordion, Badge, H1, H2, MonoText, P, Seperator, Switch };

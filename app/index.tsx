@@ -19,6 +19,10 @@ const components: {
     name: "Badge",
     href: "/badge",
   },
+  {
+    name: "Switch",
+    href: "/switch",
+  }
 ];
 
 export default function HomeScreen() {

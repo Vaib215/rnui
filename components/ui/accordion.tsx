@@ -14,7 +14,7 @@ const SingleAccordion = memo(
     className,
     titleClassName = "text-lg",
     contentClassName,
-    openIcon = "keyboard-arrow-up",
+    openIcon = "keyboard-arrow-down",
   }: {
     title: string;
     children: React.ReactNode;
