@@ -19,14 +19,20 @@ const data = [
     children: (
       <View className="flex-row w-screen">
         <View className="flex-1 space-y-4 my-2">
-          <Text>Default</Text>
-          <Text>Checked</Text>
-          <Text>Disabled</Text>
+          <Text>{"<Switch label='Default' />"}</Text>
+          <Text>{"<Switch checked ... />"}</Text>
+          <Text>{"<Switch disabled={true} ... />"}</Text>
+          <Text>{"<Switch variant='secondary' ... />"}</Text>
+          <Text>{"<Switch variant='outline' ... />"}</Text>
+          <Text>{"<Switch variant='destructive' .../>"}</Text>
         </View>
         <View className="flex-1 flex-col">
-          <Switch label="Switch" className="my-1" />
-          <Switch label="Checked Switch" checked={true} className="my-1" />
-          <Switch label="Disabled Switch" disabled={true} className="my-1" />
+          <Switch label="Default" className="my-2" />
+          <Switch label="Checked" checked={true} className="mb-2"/>
+          <Switch label="Disabled" disabled={true} className="mb-2" />
+          <Switch label="Secondary" variant="secondary" className="my-2"/>
+          <Switch label="Outline" variant="outline" className="my-2" />
+          <Switch label="Destructive" variant="destructive" />
         </View>
       </View>
     ),
@@ -47,23 +53,10 @@ type SwitchProps = {
   checkedLabel?: string;
   className?: string;
   textClassName?: string;
+  variant?: "primary" | "secondary" | "outline" | "destructive";
 };`}
           </MonoText>
         </Text>
-
-        <Text className="text-gray-300 my-2">
-          The component takes the following props:
-        </Text>
-        <View className="flex-col">
-          <Text className="text-gray-300 my-2">checked</Text>
-          <Text className="text-gray-300 my-2">setChecked</Text>
-          <Text className="text-gray-300 my-2">onCheckChange</Text>
-          <Text className="text-gray-300 my-2">label</Text>
-          <Text className="text-gray-300 my-2">disabled</Text>
-          <Text className="text-gray-300 my-2">checkedLabel</Text>
-          <Text className="text-gray-300 my-2">className</Text>
-          <Text className="text-gray-300 my-2">textClassName</Text>
-        </View>
 
         <Text className="text-gray-300 my-2">
           The 'checked' prop takes a boolean value. Defaults to false.
@@ -71,6 +64,10 @@ type SwitchProps = {
 
         <Text className="text-gray-300 my-2">
           The 'disabled' prop takes a boolean value. Defaults to false.
+        </Text>
+
+        <Text className="text-gray-300 my-2">
+          The 'variant' prop takes a string value. Defaults to 'primary'.
         </Text>
       </View>
     ),

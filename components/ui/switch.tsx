@@ -1,6 +1,6 @@
 import { Pressable, View, Animated } from "react-native";
-import { Text } from "../others/Themed";
-import { useState, useEffect, useRef } from "react";
+import { Text, useThemeColor } from "../others/Themed";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "@react-navigation/native";
 
 interface SwitchProps {
@@ -11,6 +11,7 @@ interface SwitchProps {
   checkedLabel?: string;
   className?: string;
   textClassName?: string;
+  variant?: "primary" | "secondary" | "outline" | "destructive";
 }
 
 export default function Switch({
@@ -21,6 +22,7 @@ export default function Switch({
   checkedLabel,
   className,
   textClassName,
+  variant = "primary",
 }: SwitchProps) {
   const [checked, setChecked] = useState(initialChecked);
   const theme = useTheme();
@@ -48,6 +50,31 @@ export default function Switch({
     }
   };
 
+  const variantStyles = {
+    primary: {
+      backgroundColor: checked
+        ? useThemeColor({}, "text")
+        : useThemeColor({}, "text") + "50",
+    },
+    secondary: {
+      backgroundColor: checked
+        ? useThemeColor({}, "tabIconDefault") + "75"
+        : useThemeColor({}, "tabIconDefault") + "50",
+    },
+    outline: {
+      backgroundColor: useThemeColor({}, "text") + "20",
+      borderWidth: 2,
+      borderColor: checked
+        ? useThemeColor({}, "tabIconDefault")
+        : useThemeColor({}, "tabIconDefault") + "25",
+    },
+    destructive: {
+      backgroundColor: checked
+        ? useThemeColor({}, "destructive")
+        : useThemeColor({}, "destructive") + "75",
+    },
+  };
+
   return (
     <Pressable
       onPress={handlePress}
@@ -58,28 +85,27 @@ export default function Switch({
       accessibilityLabel={checked ? checkedLabel : label}
     >
       <View
-        className={`h-6 w-12 rounded-full relative
-          ${
-            checked
-              ? isDark
-                ? "bg-slate-200"
-                : "bg-slate-800"
-              : isDark
-              ? "bg-slate-800"
-              : "bg-slate-200"
-          }      `}
+        className={`h-6 w-12 rounded-full relative`}
+        style={variantStyles[variant]}
       >
         <Animated.View
           style={{
             transform: [{ translateX }],
+            borderColor:
+              variant === "outline"
+                ? variantStyles[variant].borderColor
+                : "transparent",
           }}
           className={`h-5 w-5 rounded-full bg-white absolute
         ${isDark ? "bg-black" : "bg-white"}
-        top-0.5
+        ${variant === "outline" && checked ? "border-2" : ""}
+        ${variant === "outline" ? "top-0" : "top-0.5"}
         `}
         />
       </View>
-      <Text className={textClassName}>{(checkedLabel && checked) ? checkedLabel : label}</Text>
+      <Text className={textClassName}>
+        {checkedLabel && checked ? checkedLabel : label}
+      </Text>
     </Pressable>
   );
 }

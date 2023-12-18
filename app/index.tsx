@@ -22,6 +22,14 @@ const components: {
   {
     name: "Switch",
     href: "/switch",
+  },
+  {
+    name: "Progress",
+    href: "/progress",
+  },
+  {
+    name: "Checkbox",
+    href: "/checkbox",
   }
 ];
 
