@@ -1,7 +1,8 @@
-import { Pressable, View, Animated } from "react-native";
-import { Text, useThemeColor } from "../others/Themed";
-import { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "@react-navigation/native";
+import { useEffect, useRef, useState } from "react";
+import { Animated, Pressable, View } from "react-native";
+import { variantStyles } from "../../utils/styles";
+import { Text } from "../others/Themed";
 
 interface SwitchProps {
   checked?: boolean;
@@ -50,31 +51,6 @@ export default function Switch({
     }
   };
 
-  const variantStyles = {
-    primary: {
-      backgroundColor: checked
-        ? useThemeColor({}, "text")
-        : useThemeColor({}, "text") + "50",
-    },
-    secondary: {
-      backgroundColor: checked
-        ? useThemeColor({}, "tabIconDefault") + "75"
-        : useThemeColor({}, "tabIconDefault") + "50",
-    },
-    outline: {
-      backgroundColor: useThemeColor({}, "text") + "20",
-      borderWidth: 2,
-      borderColor: checked
-        ? useThemeColor({}, "tabIconDefault")
-        : useThemeColor({}, "tabIconDefault") + "25",
-    },
-    destructive: {
-      backgroundColor: checked
-        ? useThemeColor({}, "destructive")
-        : useThemeColor({}, "destructive") + "75",
-    },
-  };
-
   return (
     <Pressable
       onPress={handlePress}
@@ -86,14 +62,14 @@ export default function Switch({
     >
       <View
         className={`h-6 w-12 rounded-full relative`}
-        style={variantStyles[variant]}
+        style={variantStyles({checked})[variant]}
       >
         <Animated.View
           style={{
             transform: [{ translateX }],
             borderColor:
               variant === "outline"
-                ? variantStyles[variant].borderColor
+                ? variantStyles({checked})[variant].borderColor
                 : "transparent",
           }}
           className={`h-5 w-5 rounded-full bg-white absolute

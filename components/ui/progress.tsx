@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { View, useThemeColor } from "../others/Themed";
 import { Animated } from "react-native";
+import { variantStyles } from "../../utils/styles";
 
 interface ProgressProps {
   progress: string;
@@ -32,31 +33,11 @@ export default function Progress({
     outputRange: ["0%", progress],
   });
 
-  const variantStyles = {
-    primary: {
-      backgroundColor: useThemeColor({}, "text"),
-      borderColor: useThemeColor({}, "text"),
-    },
-    secondary: {
-      backgroundColor: useThemeColor({}, "tabIconDefault") + "75",
-      borderColor: useThemeColor({}, "tabIconDefault"),
-    },
-    outline: {
-      backgroundColor: useThemeColor({}, "text") + "50",
-      borderWidth: 2,
-      borderColor: useThemeColor({}, "tabIconDefault"),
-    },
-    destructive: {
-      backgroundColor: useThemeColor({}, "destructive"),
-      borderColor: useThemeColor({}, "destructive"),
-    },
-  };
-
   return (
     <View
       className={`h-2 rounded border ${className}`}
-      style={{ borderColor: variantStyles[variant].borderColor,
-        backgroundColor: variantStyles[variant].backgroundColor.slice(7) + "30"
+      style={{ borderColor: variantStyles({checked: true})[variant].borderColor,
+        backgroundColor: variantStyles({checked: true})[variant].backgroundColor.slice(7) + "30"
       }}
       accessible={true}
       accessibilityRole="progressbar"
@@ -66,7 +47,7 @@ export default function Progress({
         className={`h-full rounded`}
         style={{
           width: animatedProgress,
-          backgroundColor: variantStyles[variant].backgroundColor,
+          backgroundColor: variantStyles({checked: true})[variant].backgroundColor,
         }}
       />
     </View>

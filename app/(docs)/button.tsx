@@ -1,13 +1,20 @@
-import { View } from "react-native";
+import { ToastAndroid } from "react-native";
 import ComponentShowcase from "../../components/layout";
-import { Accordion, Checkbox, H2, MonoText, Seperator } from "../../components/ui";
-import { Text } from "../../components/others/Themed";
+import { Text, View } from "../../components/others/Themed";
+import { Accordion, Button, H2, MonoText, Seperator } from "../../components/ui";
 
 const data = [
   {
     title: "Usage",
-    children:
-      "Checkbox is a component that can be toggled on or off. It can be controlled or uncontrolled.",
+    children: (<View>
+      <MonoText>{`import {Button} from "@/components/ui"`}</MonoText>
+      <MonoText>{`<Button onPress={() => 
+  ToastAndroid.show(
+    "Hello from RNUI", 1000
+  )}>
+  Click Me
+< /Button>`}</MonoText>
+    </View>)
   },
   {
     title: "Example",
@@ -20,10 +27,6 @@ const data = [
           <Text>{"<Checkbox color='red' ... />"}</Text>
         </View>
         <View className="flex-1 flex-col">
-          <Checkbox label="Default" className="my-2" />
-          <Checkbox label="Checked" checked={true} className="my-2" />
-          <Checkbox label="Disabled" disabled={true} className="my-2" />
-          <Checkbox label="Red" color="red" />
         </View>
       </View>
     )
@@ -72,17 +75,16 @@ type CheckboxProps = {
   },
 ];
 
-export default function CheckboxPage() {
+
+export default function ButtonPage() {
   return (
-    <ComponentShowcase
-      title="Checkbox"
-      description="A control that allows the user to toggle between checked and not checked."
-    >
-      <Checkbox label="Accept terms and conditions" size={20} />
+    <ComponentShowcase title="Button" description="Displays a button or a component that looks like a button.">
+      <Button onPress={() => { ToastAndroid.show("Hello from RNUI", 1000) }}>Button</Button>
       <Seperator />
 
       <H2>Docs</H2>
       <Accordion data={data} />
+
     </ComponentShowcase>
-  );
+  )
 }

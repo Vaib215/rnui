@@ -6,10 +6,12 @@ import Checkbox from "./checkbox";
 import Progress from "./progress";
 import Seperator from "./seperator";
 import Switch from "./switch";
+import Button from "./button";
 
 export {
   Accordion,
   Badge,
+  Button,
   Checkbox,
   H1,
   H2,

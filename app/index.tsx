@@ -30,6 +30,10 @@ const components: {
   {
     name: "Checkbox",
     href: "/checkbox",
+  },
+  {
+    name: "Button",
+    href: "/button"
   }
 ];
 

@@ -1,6 +1,7 @@
 import { Text, Animated } from "react-native";
-import { TextProps, View, useThemeColor } from "../others/Themed";
+import { TextProps, View } from "../others/Themed";
 import React, { useEffect, useRef } from "react";
+import { variantStyles } from "../../utils/styles";
 
 export default function Badge({
   variant = "primary",
@@ -16,26 +17,6 @@ export default function Badge({
 } & TextProps &
   React.ComponentProps<typeof View> &
   React.ComponentProps<typeof Text>) {
-  const variantStyles = {
-    primary: {
-      color: useThemeColor({}, "background"),
-      backgroundColor: useThemeColor({}, "text"),
-    },
-    secondary: {
-      color: useThemeColor({}, "tint"),
-      backgroundColor: useThemeColor({}, "tabIconDefault") + "25",
-    },
-    outline: {
-      color: useThemeColor({}, "text"),
-      backgroundColor: "transparent",
-      borderWidth: 1,
-      borderColor: useThemeColor({}, "tabIconDefault") + "50",
-    },
-    destructive: {
-      color: useThemeColor({}, "text"),
-      backgroundColor: useThemeColor({}, "destructive") + "75",
-    },
-  };
 
   const sizeStyles = {
     sm: {
@@ -81,11 +62,11 @@ export default function Badge({
 
   const animatedStyle = animate
     ? {
-        opacity: animation.interpolate({
-          inputRange: [0, 1],
-          outputRange: [1, 0.5],
-        }),
-      }
+      opacity: animation.interpolate({
+        inputRange: [0, 1],
+        outputRange: [1, 0.5],
+      }),
+    }
     : {};
 
   return (
@@ -93,7 +74,8 @@ export default function Badge({
       <Animated.Text
         className={`font-medium rounded-full`}
         style={{
-          ...variantStyles[variant as keyof typeof variantStyles],
+          ...variantStyles({ checked: true })[variant],
+          ...variant === "destructive" && { backgroundColor: variantStyles({ checked: false })[variant].backgroundColor },
           ...sizeStyles[size as keyof typeof sizeStyles],
           ...animatedStyle,
         }}
